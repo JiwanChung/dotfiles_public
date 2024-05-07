@@ -1,0 +1,8 @@
+session_name: base
+windows:
+  - window_name: base
+    layout: tiled
+    shell_command_before:
+      - cd ~/ # run as a first command in all panes
+    panes:
+      - echo first pane # pane no. 1

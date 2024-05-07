@@ -1,0 +1,10 @@
+tmuxp
+gpustat
+xxh-xxh
+ruff
+tqdm
+vulture
+thefuck
+pytype
+pyright
+tiptop

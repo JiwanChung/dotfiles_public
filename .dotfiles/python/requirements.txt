@@ -1,0 +1,9 @@
+pylint
+yapf
+isort
+pynvim
+python-lsp-server
+pipx
+notedown
+msgpack-python
+nvidia-ml-py

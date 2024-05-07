@@ -1,0 +1,19 @@
+flags:
+  use_slurm_when_available: True
+  local_automatic_gpu_assignment: False
+server:
+  cpu_default:
+    p: dell_cpu
+    q: cpu_qos
+  default:
+    p: suma_a6000
+    q: big_qos
+  a6000:
+    p: suma_a6000
+    q: big_qos
+  "3090":
+    p: big_suma_rtx3090
+    q: big_qos
+  "4090":
+    p: big_suma_rtx4090
+    q: big_qos

@@ -1,0 +1,7 @@
+behavior {
+    theme "Kon"
+    
+    table {
+        showHiddenFiles true
+    }
+}

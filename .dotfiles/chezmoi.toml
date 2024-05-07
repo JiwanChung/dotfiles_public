@@ -1,0 +1,4 @@
+encryption = "age"
+[age]
+    identity = '~/.dotfiles_key.txt'
+    symmetric = true

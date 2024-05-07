@@ -1,0 +1,4 @@
+# run fish
+PATH=$PATH:/opt/homebrew/bin:$HOME/micromamba/bin:$HOME/.local/bin
+
+fish

@@ -1,0 +1,28 @@
+snippet     torch
+abbr        import torch
+alias       th
+options     head
+  import torch
+  from torch import nn
+  import torch.nn.functional as F
+  from einops import rearrange
+
+snippet     simple-parsing
+abbr        import simple-parsing
+alias       parse
+options     head
+  from typing import Optional
+  from dataclasses import dataclass
+
+  from simple_parsing import ArgumentParser
+
+  @dataclass
+  class Config:
+    ${0:config: Optional[str] = None}
+
+  def parse_args():
+    parser = ArgumentParser()
+    parser.add_arguments(Config, dest="config")
+    args = parser.parse_args()
+    args = args.config
+    return args

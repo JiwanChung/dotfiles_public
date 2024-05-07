@@ -1,0 +1,23 @@
+PATH=$PATH:/opt/homebrew/bin
+
+# python
+alias python=python3
+alias pip=pip3
+alias pi="pip install"
+alias piu="pip uninstall"
+
+# chezmoi
+alias cha="chezmoi add"
+alias che="chezmoi edit --apply"
+alias chc="chezmoi cd"
+
+# ls 
+alias ls="eza"
+alias la="ls -al --icons"
+
+# conda
+alias conda="micromamba"
+
+alias ca="conda activate"
+alias cad="conda dactivate"
+alias cl="conda list"
