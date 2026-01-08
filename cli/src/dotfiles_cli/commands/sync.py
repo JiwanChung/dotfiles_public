@@ -9,7 +9,16 @@ from ..config import get_config
 from ..files.manifest import Manifest
 from ..files.linker import create_symlink, check_symlink
 from ..files.copier import copy_file, check_copy
-from ..utils.console import success, error, warning, info, header, dim, create_table, console
+from ..utils.console import (
+    success,
+    error,
+    warning,
+    info,
+    header,
+    dim,
+    create_table,
+    console,
+)
 from ..utils import git
 
 
@@ -88,9 +97,13 @@ def apply(force: bool = False, dry_run: bool = False):
             continue
 
         if entry.type == "symlink":
-            ok, status = create_symlink(source_abs, entry.dest, force=force, backup_dir=backup_dir)
+            ok, status = create_symlink(
+                source_abs, entry.dest, force=force, backup_dir=backup_dir
+            )
         else:
-            ok, status = copy_file(source_abs, entry.dest, force=force, backup_dir=backup_dir)
+            ok, status = copy_file(
+                source_abs, entry.dest, force=force, backup_dir=backup_dir
+            )
 
         if ok:
             if status == "ok":
@@ -570,19 +583,23 @@ def publish(
             subprocess.run(["git", "init"], cwd=output_dir, capture_output=True)
             subprocess.run(
                 ["git", "remote", "add", "origin", public_repo],
-                cwd=output_dir, capture_output=True
+                cwd=output_dir,
+                capture_output=True,
             )
 
         # Check remote is correct
         result = subprocess.run(
             ["git", "remote", "get-url", "origin"],
-            cwd=output_dir, capture_output=True, text=True
+            cwd=output_dir,
+            capture_output=True,
+            text=True,
         )
         if result.returncode == 0 and result.stdout.strip() != public_repo:
             info(f"Updating remote to: {public_repo}")
             subprocess.run(
                 ["git", "remote", "set-url", "origin", public_repo],
-                cwd=output_dir, capture_output=True
+                cwd=output_dir,
+                capture_output=True,
             )
 
         # Commit and push
@@ -592,27 +609,33 @@ def publish(
         # Check if there are changes
         result = subprocess.run(
             ["git", "status", "--porcelain"],
-            cwd=output_dir, capture_output=True, text=True
+            cwd=output_dir,
+            capture_output=True,
+            text=True,
         )
         if not result.stdout.strip():
             info("No changes to push")
             return True
 
         subprocess.run(
-            ["git", "commit", "-m", message],
-            cwd=output_dir, capture_output=True
+            ["git", "commit", "-m", message], cwd=output_dir, capture_output=True
         )
 
         result = subprocess.run(
             ["git", "push", "-u", "origin", "main"],
-            cwd=output_dir, capture_output=True, text=True
+            cwd=output_dir,
+            capture_output=True,
+            text=True,
         )
+        print(result)
 
         if result.returncode != 0:
             # Try master branch
             result = subprocess.run(
                 ["git", "push", "-u", "origin", "master"],
-                cwd=output_dir, capture_output=True, text=True
+                cwd=output_dir,
+                capture_output=True,
+                text=True,
             )
 
         if result.returncode == 0:
@@ -637,9 +660,11 @@ def generate_bootstrap(repo: Optional[str] = None) -> str:
     if not repo:
         # Try to get repo URL from git remote
         import subprocess
+
         result = subprocess.run(
             ["git", "-C", str(cfg.dotfiles_path), "remote", "get-url", "origin"],
-            capture_output=True, text=True
+            capture_output=True,
+            text=True,
         )
         if result.returncode == 0:
             repo = result.stdout.strip()
@@ -686,9 +711,10 @@ def publish_gist(
     # Write to temp file with correct name
     import tempfile
     import os
+
     temp_dir = tempfile.mkdtemp()
     temp_path = os.path.join(temp_dir, filename)
-    with open(temp_path, 'w') as f:
+    with open(temp_path, "w") as f:
         f.write(content)
 
     try:
@@ -701,9 +727,14 @@ def publish_gist(
             # Get existing files to delete old ones
             view_result = subprocess.run(
                 ["gh", "api", f"/gists/{gist_id}", "-q", ".files | keys[]"],
-                capture_output=True, text=True
+                capture_output=True,
+                text=True,
             )
-            old_files = view_result.stdout.strip().split('\n') if view_result.returncode == 0 else []
+            old_files = (
+                view_result.stdout.strip().split("\n")
+                if view_result.returncode == 0
+                else []
+            )
 
             # Build payload: add new file, delete old files
             files_payload = {filename: {"content": content}}
@@ -714,7 +745,8 @@ def publish_gist(
             result = subprocess.run(
                 ["gh", "api", "-X", "PATCH", f"/gists/{gist_id}", "--input", "-"],
                 input=json.dumps({"files": files_payload}),
-                capture_output=True, text=True
+                capture_output=True,
+                text=True,
             )
             if result.returncode != 0:
                 error("Failed to update gist")
@@ -726,9 +758,11 @@ def publish_gist(
             # Create new gist
             info("Creating new gist...")
             import subprocess
+
             result = subprocess.run(
                 ["gh", "gist", "create", "--public", temp_path],
-                capture_output=True, text=True
+                capture_output=True,
+                text=True,
             )
             if result.returncode != 0:
                 error("Failed to create gist")
@@ -751,14 +785,21 @@ def publish_gist(
             print()
             # Get username
             user_result = run_quiet(["gh", "api", "user", "-q", ".login"])
-            username = user_result.stdout.strip() if user_result.returncode == 0 else "USERNAME"
-            print(f'curl -fsSL https://gist.githubusercontent.com/{username}/{gist_id}/raw/{filename} | bash')
+            username = (
+                user_result.stdout.strip()
+                if user_result.returncode == 0
+                else "USERNAME"
+            )
+            print(
+                f"curl -fsSL https://gist.githubusercontent.com/{username}/{gist_id}/raw/{filename} | bash"
+            )
             print()
 
         return True
 
     finally:
         import shutil
+
         shutil.rmtree(temp_dir, ignore_errors=True)
 
 
@@ -986,7 +1027,8 @@ def diff_full(file: Optional[str] = None):
         if dest_abs.exists() and dest_abs.is_file() and source_abs.is_file():
             result = subprocess.run(
                 ["diff", "-u", str(dest_abs), str(source_abs)],
-                capture_output=True, text=True
+                capture_output=True,
+                text=True,
             )
             if result.stdout:
                 header(f"~/{entry.dest}")
@@ -995,7 +1037,8 @@ def diff_full(file: Optional[str] = None):
         elif dest_abs.is_dir() and source_abs.is_dir():
             result = subprocess.run(
                 ["diff", "-rq", str(dest_abs), str(source_abs)],
-                capture_output=True, text=True
+                capture_output=True,
+                text=True,
             )
             if result.stdout:
                 header(f"~/{entry.dest}/")
