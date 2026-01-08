@@ -2,7 +2,7 @@
 # Used by: dotfiles publish local
 
 # Public repository URL (for auto-push)
-public_repo: https://github.com/JiwanChung/dotfiles-public.git
+public_repo: https://github.com/JiwanChung/dotfiles_public.git
 
 # Additional patterns to exclude (beyond defaults)
 exclude:
