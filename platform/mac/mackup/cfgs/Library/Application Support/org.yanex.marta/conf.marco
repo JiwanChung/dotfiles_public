@@ -1,0 +1,17 @@
+behavior {
+    theme "Kon"
+}
+
+keyBindings {
+    "Opt+1" "core.tab.1"
+    "Opt+2" "core.tab.2"
+    "Opt+3" "core.tab.3"
+    "Cmd+0" "core.hierarchy"
+    "Cmd+1" "core.volumes"
+    "Cmd+2" "core.favorites"
+    "Shift+Cmd+2" "core.favorites.add"
+    "Cmd+f" "core.lookup"
+    "Cmd+p" "core.flatten"
+    "Right" "core.change.current.pane"
+    "Left" "core.change.current.pane"
+}

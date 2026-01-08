@@ -1,0 +1,87 @@
+mac:
+  brew:
+  - infat
+  - mackup
+  - mas
+  - micromamba
+  - docker
+  - docker-compose
+  - mole
+  cask:
+  - dockdoor
+  - ghostty
+  - karabiner-elements
+  - logseq
+  - marta
+  - meetingbar
+  - notion
+  - pearcleaner
+  - raycast
+  - rectangle
+  - slack
+  - visual-studio-code
+  mas:
+  - '937984704'
+  - '869223134'
+  - '409183694'
+  - '409203825'
+  - '409201541'
+general:
+  conda:
+  - python
+  - tmux:brew
+  - rsync
+  - curl
+  - git
+  - gh
+  - uv
+  - fish
+  - zoxide
+  - starship
+  - duf
+  - dust
+  - ouch
+  - fd-find
+  - procs
+  - eza
+  - bat
+  - ripgrep
+  - age
+  - helix
+  - jless
+  - atuin
+  - git-delta
+  - aria2
+  - openssh
+  - timg
+  - lazygit
+  - pueue
+  - croc
+  - git-crypt
+  - superfile
+  python:
+  - ruff
+  - pyright
+  - black
+  - tmuxp
+  - gpustat
+  - tiptop
+  - nvitop
+  - llm
+  rust:
+  - miniserve
+  - whalespotter
+  - rgoto
+  - pik
+  - syncz
+  bun:
+  - ccusage
+custom:
+- name: brew
+  platforms:
+  - darwin
+- fisher
+- claude-code
+wsl:
+  winget:
+  - raycast

@@ -1,0 +1,7 @@
+Documents "${user.documents}"
+Downloads "${user.downloads}"
+전문연 "${user.documents}/전문연"
+Home "~"
+Desktop "${user.desktop}"
+Library "${user.library}"
+Applications "${all.applications}"

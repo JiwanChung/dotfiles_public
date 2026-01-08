@@ -1,0 +1,27 @@
+PATH=$PATH:$HOME/micromamba/bin:$HOME/.local/bin
+if [ -d /opt/homebrew/bin ]; then
+  PATH=$PATH:/opt/homebrew/bin
+fi
+
+[[ -o interactive ]] || return
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+# export MAMBA_EXE="$HOME/.local/bin/micromamba";
+export MAMBA_EXE=$(which micromamba);
+export MAMBA_ROOT_PREFIX="$HOME/micromamba";
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell bash --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+
+if [ -x "$HOME/bin/keepalive_data.sh" ]; then
+    echo "running keepalive"
+    "$HOME/bin/keepalive_data.sh" ensure "/scratch2/jiwan_chung" "@weekly"
+fi
+
+eval "$(micromamba shell hook --shell bash)"

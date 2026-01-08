@@ -1,0 +1,22 @@
+symlinks:
+  files/home/dot_bash_profile: .bash_profile
+  files/home/dot_bashrc: .bashrc
+  files/home/dot_zprofile: .zprofile
+  files/home/dot_zshrc: .zshrc
+  files/home/dot_gitconfig: .gitconfig
+  files/home/dot_tmuxp: .tmuxp
+  files/home/dot_ssh: .ssh
+  files/config/helix: .config/helix
+  files/config/private_fish: .config/fish
+  files/config/starship.toml: .config/starship.toml
+  files/config/tmux: .config/tmux
+  files/config/yazi: .config/yazi
+  files/config/zellij: .config/zellij
+  files/config/coc: .config/coc
+  files/config/pip: .config/pip
+  files/config/private_atuin: .config/atuin
+  files/config/trex.yaml: .config/trex.yaml
+  files/config/karabiner: .config/karabiner
+  secrets/.env: .env
+  secrets/dot_ssh: dotfiles/files/home/dot_ssh
+  files/dotfiles/config/packages.yaml: dotfiles/config/packages.yaml

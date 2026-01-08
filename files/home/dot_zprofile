@@ -1,0 +1,24 @@
+PATH=$PATH:/opt/homebrew/bin:$HOME/micromamba/bin:$HOME/.local/bin
+
+[[ -o interactive ]] || return
+
+# >>> mamba initialize >>>
+export MAMBA_EXE="$(command -v micromamba)"
+if [ -n "$MAMBA_ROOT_PREFIX" ]; then
+    mamba_env_loc="$(micromamba info | awk -F ': ' '/^ *env location/ {print $2}')"
+    if [ -n "$mamba_env_loc" ] && [ "$mamba_env_loc" != "-" ]; then
+        export MAMBA_ROOT_PREFIX="$mamba_env_loc"
+    fi
+    __mamba_setup="$(micromamba shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+else
+    __mamba_setup="$(micromamba shell hook --shell zsh 2> /dev/null)"
+fi
+__mamba_setup="$(micromamba shell hook --shell zsh 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+# <<< mamba initialize <<<
+micromamba activate base
+fish

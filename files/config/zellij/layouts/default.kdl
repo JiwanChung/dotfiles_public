@@ -1,0 +1,24 @@
+layout {
+    cwd "~/projects"
+    pane split_direction="vertical" {
+        pane size=40 command="fish" {
+            args "-c" "yy"
+        }
+        pane command="fish" {
+            args "-c" "hx"
+        }
+        pane split_direction="horizontal" size=50 {
+            pane focus=true
+            pane 
+            pane command="fish" {
+                args "-c" "gpustat"
+            }
+        }
+    }
+    pane size=2 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+}

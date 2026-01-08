@@ -1,0 +1,10 @@
+/public
+/.git
+__pycache__
+*.egg-info
+
+# Helix runtime (grammars are rebuilt with `hx --grammar fetch && build`)
+files/config/helix/runtime/
+
+# Pre-apply backups
+backups/

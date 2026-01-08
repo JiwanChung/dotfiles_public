@@ -1,0 +1,56 @@
+[[language]]
+name = "python"
+scope = "source.python"
+injection-regex = "python"
+file-types = ["py","pyi","py3","pyw",".pythonstartup",".pythonrc"]
+shebangs = ["python"]
+roots = [".", "pyproject.toml", "pyrightconfig.json"]
+comment-token = "#"
+# language-servers = ["llmvm-python"]
+language-servers = ["snippets-ls-python", "pyright", "ruff", "gpt"]
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
+
+[language.formatter]
+command = "black"
+args = [
+  "-",
+  "--quiet",
+  "--line-length=88"
+]
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.pyright.config]
+reportMissingTypeStubs = false
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+autoImportCompletions = true
+
+[language-server.ruff]
+command = "ruff"
+args = ["server", "--preview"]
+
+[language-server.ruff.config]
+settings = {args = []}
+
+# [language-server.llmvm-python]
+# command = "llmvm-codeassist"
+# args = ["pyright"]
+
+[language-server.snippets-ls-python]
+command = "simple-completion-language-server"
+
+[language-server.snippets-ls-python.config]
+max_completion_items = 20     # set max completion results len for each group: words, snippets, unicode-input
+snippets_first = true         # completions will return before snippets by default
+feature_words = true          # enable completion by word
+feature_snippets = true       # enable snippets
+feature_unicode_input = true  # enable "unicode input"
+feature_paths = true          # enable path completion
+
+[language-server.gpt]
+command = "helix-gpt"

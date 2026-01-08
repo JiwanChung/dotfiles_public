@@ -1,0 +1,11 @@
+cursor = "_"
+confirm-before-quit = false
+hide-cursor-when-typing = true
+
+[fonts]
+size = 11
+family = "CaskaydiaCove Nerd Font"
+
+[shell]
+program = "wsl"
+args = []

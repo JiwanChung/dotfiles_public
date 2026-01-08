@@ -1,0 +1,71 @@
+theme = "jellybeans_"
+
+[editor]
+line-number = "absolute"
+mouse = true
+true-color = true
+cursorline = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-type", "read-only-indicator", "file-modification-indicator"]
+
+[editor.lsp]
+display-messages = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.whitespace]
+render = "all"
+
+[editor.whitespace.characters]
+space = " "
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "⏎"
+tabpad = "·" 
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[keys.normal]
+G = "goto_last_line"
+H = "goto_first_nonwhitespace"
+L = "goto_line_end"
+C-s = ":w"
+C-o = ":open ~/.config/helix/config.toml"
+C-r = "redo"
+C-y = ["extend_line_below", "yank"]
+# p = "paste_clipboard_after"
+# P = "paste_clipboard_before"
+# y = "yank_joined_to_clipboard"
+D = ["yank_main_selection_to_clipboard", "delete_selection"]
+V = "extend_to_line_end"
+
+[keys.normal.space]
+f = "file_picker_in_current_directory"
+F = "no_op"
+# p = "no_op"
+# P = "no_op"
+# y = "no_op"
+
+[keys.select]
+G = "goto_last_line"
+H = "goto_first_nonwhitespace"
+L = "goto_line_end"
+p = "replace_selections_with_clipboard"
+P = "no_op"
+y = "yank_joined_to_clipboard"
+D = ["yank_main_selection_to_clipboard", "delete_selection"]
+V = "extend_to_line_end"
