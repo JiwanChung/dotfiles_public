@@ -622,17 +622,16 @@ def publish(
         )
 
         result = subprocess.run(
-            ["git", "push", "-u", "origin", "main"],
+            ["git", "push", "-u", "origin", "main", "--force"],
             cwd=output_dir,
             capture_output=True,
             text=True,
         )
-        print(result)
 
         if result.returncode != 0:
             # Try master branch
             result = subprocess.run(
-                ["git", "push", "-u", "origin", "master"],
+                ["git", "push", "-u", "origin", "master", "--force"],
                 cwd=output_dir,
                 capture_output=True,
                 text=True,
